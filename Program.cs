@@ -8,15 +8,18 @@ namespace PetShop
 {
     static class Program
     {
+        public static PetShopEntities22 psDb = new PetShopEntities22();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+            Application.EnableVisualStyles(); 
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Authorization()) ;
         }
     }
 }
+
+

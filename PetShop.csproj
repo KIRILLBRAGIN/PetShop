@@ -33,8 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,14 +55,116 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Authorization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Authorization.Designer.cs">
+      <DependentUpon>Authorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientSet.cs">
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomSet.cs">
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormClient.Designer.cs">
+      <DependentUpon>FormClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCustom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCustom.Designer.cs">
+      <DependentUpon>FormCustom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProduct.Designer.cs">
+      <DependentUpon>FormProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProvider.Designer.cs">
+      <DependentUpon>FormProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStorage.Designer.cs">
+      <DependentUpon>FormStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormWorker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWorker.Designer.cs">
+      <DependentUpon>FormWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPetShop.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPetShop.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPetShop.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPetShop.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPetShop.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductSet.cs">
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderSet.cs">
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StorageSet.cs">
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkerSet.cs">
+      <DependentUpon>ModelPetShop.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Authorization.resx">
+      <DependentUpon>Authorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormClient.resx">
+      <DependentUpon>FormClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCustom.resx">
+      <DependentUpon>FormCustom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProduct.resx">
+      <DependentUpon>FormProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProvider.resx">
+      <DependentUpon>FormProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStorage.resx">
+      <DependentUpon>FormStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWorker.resx">
+      <DependentUpon>FormWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +173,16 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EntityDeploy Include="ModelPetShop.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelPetShop.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelPetShop.edmx.diagram">
+      <DependentUpon>ModelPetShop.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +195,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelPetShop.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelPetShop.edmx</DependentUpon>
+      <LastGenOutput>ModelPetShop.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelPetShop.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelPetShop.edmx</DependentUpon>
+      <LastGenOutput>ModelPetShop.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\Без имени-31.png" />
+    <None Include="Resources\4cEEPKQtnq0-removebg-preview1.ico.png" />
+    <None Include="Resources\123-removebg-preview.png" />
+    <None Include="Resources\Без имени-3.png" />
+    <None Include="Resources\Без имени-2.png" />
+    <None Include="Resources\Без имени-1.png" />
+    <None Include="Resources\фон хз какая попытка.png" />
+    <None Include="Resources\фон 51.png" />
+    <None Include="Resources\фон 5.png" />
+    <None Include="Resources\большой фон 1.png" />
+    <None Include="Resources\большой фон.png" />
+    <None Include="Resources\333333.png" />
+    <None Include="Resources\фон.png" />
+    <None Include="Resources\фон3фотошоп.jpg" />
+    <None Include="Resources\фон2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

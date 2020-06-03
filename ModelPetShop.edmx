@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PetShop.ruModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClientSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CustomSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdWorker" Type="int" Nullable="false" />
+          <Property Name="IdProduct" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Data" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ProductSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProvider" Type="int" Nullable="false" />
+          <Property Name="Provider" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Product" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <EntityType Name="ProviderSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameCompany" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TypeProduct" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Product" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address_City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address_Street" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address_House" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="StorageSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProvider" Type="int" Nullable="false" />
+          <Property Name="IdProduct" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkerSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Position" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="WorkTime" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_CustomSet_ClientSet">
+          <End Role="ClientSet" Type="Self.ClientSet" Multiplicity="1" />
+          <End Role="CustomSet" Type="Self.CustomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="1" />
+          <End Role="CustomSet" Type="Self.CustomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomSet">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomSet_WorkerSet">
+          <End Role="WorkerSet" Type="Self.WorkerSet" Multiplicity="1" />
+          <End Role="CustomSet" Type="Self.CustomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomSet">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSet_ProviderSet">
+          <End Role="ProviderSet" Type="Self.ProviderSet" Multiplicity="1" />
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProviderSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductSet">
+              <PropertyRef Name="IdProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="1" />
+          <End Role="StorageSet" Type="Self.StorageSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StorageSet">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageSet_ProviderSet">
+          <End Role="ProviderSet" Type="Self.ProviderSet" Multiplicity="1" />
+          <End Role="StorageSet" Type="Self.StorageSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProviderSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StorageSet">
+              <PropertyRef Name="IdProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PetShopruModelContainer">
+          <EntitySet Name="ClientSet" EntityType="Self.ClientSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomSet" EntityType="Self.CustomSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSet" EntityType="Self.ProductSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProviderSet" EntityType="Self.ProviderSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageSet" EntityType="Self.StorageSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerSet" EntityType="Self.WorkerSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CustomSet_ClientSet" Association="Self.FK_CustomSet_ClientSet">
+            <End Role="ClientSet" EntitySet="ClientSet" />
+            <End Role="CustomSet" EntitySet="CustomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomSet_ProductSet" Association="Self.FK_CustomSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="CustomSet" EntitySet="CustomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomSet_WorkerSet" Association="Self.FK_CustomSet_WorkerSet">
+            <End Role="WorkerSet" EntitySet="WorkerSet" />
+            <End Role="CustomSet" EntitySet="CustomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSet_ProviderSet" Association="Self.FK_ProductSet_ProviderSet">
+            <End Role="ProviderSet" EntitySet="ProviderSet" />
+            <End Role="ProductSet" EntitySet="ProductSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageSet_ProductSet" Association="Self.FK_StorageSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StorageSet" EntitySet="StorageSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageSet_ProviderSet" Association="Self.FK_StorageSet_ProviderSet">
+            <End Role="ProviderSet" EntitySet="ProviderSet" />
+            <End Role="StorageSet" EntitySet="StorageSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PetShop.ruModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClientSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CustomSet" Relationship="Self.FK_CustomSet_ClientSet" FromRole="ClientSet" ToRole="CustomSet" />
+        </EntityType>
+        <EntityType Name="CustomSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdWorker" Type="Int32" Nullable="false" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientSet" Relationship="Self.FK_CustomSet_ClientSet" FromRole="CustomSet" ToRole="ClientSet" />
+          <NavigationProperty Name="ProductSet" Relationship="Self.FK_CustomSet_ProductSet" FromRole="CustomSet" ToRole="ProductSet" />
+          <NavigationProperty Name="WorkerSet" Relationship="Self.FK_CustomSet_WorkerSet" FromRole="CustomSet" ToRole="WorkerSet" />
+        </EntityType>
+        <EntityType Name="ProductSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProvider" Type="Int32" Nullable="false" />
+          <Property Name="Provider" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="CustomSet" Relationship="Self.FK_CustomSet_ProductSet" FromRole="ProductSet" ToRole="CustomSet" />
+          <NavigationProperty Name="ProviderSet" Relationship="Self.FK_ProductSet_ProviderSet" FromRole="ProductSet" ToRole="ProviderSet" />
+          <NavigationProperty Name="StorageSet" Relationship="Self.FK_StorageSet_ProductSet" FromRole="ProductSet" ToRole="StorageSet" />
+        </EntityType>
+        <EntityType Name="ProviderSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_House" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductSet" Relationship="Self.FK_ProductSet_ProviderSet" FromRole="ProviderSet" ToRole="ProductSet" />
+          <NavigationProperty Name="StorageSet" Relationship="Self.FK_StorageSet_ProviderSet" FromRole="ProviderSet" ToRole="StorageSet" />
+        </EntityType>
+        <EntityType Name="StorageSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProvider" Type="Int32" Nullable="false" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductSet" Relationship="Self.FK_StorageSet_ProductSet" FromRole="StorageSet" ToRole="ProductSet" />
+          <NavigationProperty Name="ProviderSet" Relationship="Self.FK_StorageSet_ProviderSet" FromRole="StorageSet" ToRole="ProviderSet" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkerSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CustomSet" Relationship="Self.FK_CustomSet_WorkerSet" FromRole="WorkerSet" ToRole="CustomSet" />
+        </EntityType>
+        <Association Name="FK_CustomSet_ClientSet">
+          <End Role="ClientSet" Type="Self.ClientSet" Multiplicity="1" />
+          <End Role="CustomSet" Type="Self.CustomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="1" />
+          <End Role="CustomSet" Type="Self.CustomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomSet">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomSet_WorkerSet">
+          <End Role="WorkerSet" Type="Self.WorkerSet" Multiplicity="1" />
+          <End Role="CustomSet" Type="Self.CustomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomSet">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSet_ProviderSet">
+          <End Role="ProviderSet" Type="Self.ProviderSet" Multiplicity="1" />
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProviderSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductSet">
+              <PropertyRef Name="IdProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="1" />
+          <End Role="StorageSet" Type="Self.StorageSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StorageSet">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StorageSet_ProviderSet">
+          <End Role="ProviderSet" Type="Self.ProviderSet" Multiplicity="1" />
+          <End Role="StorageSet" Type="Self.StorageSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProviderSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StorageSet">
+              <PropertyRef Name="IdProvider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PetShopEntities22" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClientSet" EntityType="Self.ClientSet" />
+          <EntitySet Name="CustomSet" EntityType="Self.CustomSet" />
+          <EntitySet Name="ProductSet" EntityType="Self.ProductSet" />
+          <EntitySet Name="ProviderSet" EntityType="Self.ProviderSet" />
+          <EntitySet Name="StorageSet" EntityType="Self.StorageSet" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WorkerSet" EntityType="Self.WorkerSet" />
+          <AssociationSet Name="FK_CustomSet_ClientSet" Association="Self.FK_CustomSet_ClientSet">
+            <End Role="ClientSet" EntitySet="ClientSet" />
+            <End Role="CustomSet" EntitySet="CustomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomSet_ProductSet" Association="Self.FK_CustomSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="CustomSet" EntitySet="CustomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomSet_WorkerSet" Association="Self.FK_CustomSet_WorkerSet">
+            <End Role="WorkerSet" EntitySet="WorkerSet" />
+            <End Role="CustomSet" EntitySet="CustomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSet_ProviderSet" Association="Self.FK_ProductSet_ProviderSet">
+            <End Role="ProviderSet" EntitySet="ProviderSet" />
+            <End Role="ProductSet" EntitySet="ProductSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageSet_ProductSet" Association="Self.FK_StorageSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StorageSet" EntitySet="StorageSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StorageSet_ProviderSet" Association="Self.FK_StorageSet_ProviderSet">
+            <End Role="ProviderSet" EntitySet="ProviderSet" />
+            <End Role="StorageSet" EntitySet="StorageSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PetShopruModelContainer" CdmEntityContainer="PetShopEntities22">
+          <EntitySetMapping Name="ClientSet">
+            <EntityTypeMapping TypeName="PetShop.ruModel.ClientSet">
+              <MappingFragment StoreEntitySet="ClientSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomSet">
+            <EntityTypeMapping TypeName="PetShop.ruModel.CustomSet">
+              <MappingFragment StoreEntitySet="CustomSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdWorker" ColumnName="IdWorker" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSet">
+            <EntityTypeMapping TypeName="PetShop.ruModel.ProductSet">
+              <MappingFragment StoreEntitySet="ProductSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderSet">
+            <EntityTypeMapping TypeName="PetShop.ruModel.ProviderSet">
+              <MappingFragment StoreEntitySet="ProviderSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NameCompany" ColumnName="NameCompany" />
+                <ScalarProperty Name="TypeProduct" ColumnName="TypeProduct" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_Street" ColumnName="Address_Street" />
+                <ScalarProperty Name="Address_House" ColumnName="Address_House" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageSet">
+            <EntityTypeMapping TypeName="PetShop.ruModel.StorageSet">
+              <MappingFragment StoreEntitySet="StorageSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PetShop.ruModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkerSet">
+            <EntityTypeMapping TypeName="PetShop.ruModel.WorkerSet">
+              <MappingFragment StoreEntitySet="WorkerSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="WorkTime" ColumnName="WorkTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
